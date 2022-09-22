@@ -1,0 +1,6 @@
+#!/bin/bash
+
+gcc -c main.c  -lglut -lGL -lGLU -lm
+gcc -c fgraph.c  -lglut -lGL -lGLU -lm
+gcc -o fgraph main.o fgraph.o  -lglut -lGL -lGLU -lm
+./fgraph
