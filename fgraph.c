@@ -4,19 +4,19 @@ void draw_axises(float cx, float cy)
 {
     glColor3f(1.0, 0.0, 1.0);
 
-    glVertex2f(cx -10,cy);
-    glVertex2f(cx + 10, cy);
-    glVertex2f(cx + 10, cy);
-    glVertex2f(cx + 9.5, cy + 0.5);
-    glVertex2f(cx + 10, cy);
-    glVertex2f(cx + 9.5, cy -0.5);
+    glVertex2f(cx - b,cy);
+    glVertex2f(cx + b, cy);
+    glVertex2f(cx + b, cy);
+    glVertex2f(cx + b * 0.99, cy + b* 0.01);
+    glVertex2f(cx + b, cy);
+    glVertex2f(cx + b * 0.99, cy - b * 0.01);
 
-    glVertex2f(cx, cy - 10);
-    glVertex2f(cx, cy + 10);
-    glVertex2f(cx, cy + 10);
-    glVertex2f(cx + 0.5, cy + 9.5);
-    glVertex2f(cx, cy + 10);
-    glVertex2f(cx - 0.5, cy + 9.5);
+    glVertex2f(cx, cy - b);
+    glVertex2f(cx, cy + b);
+    glVertex2f(cx, cy + b);
+    glVertex2f(cx + b * 0.01, cy + b * 0.99);
+    glVertex2f(cx, cy + b);
+    glVertex2f(cx - b * 0.01, cy + b * 0.99);
 
 
 }
@@ -31,7 +31,7 @@ void reshape(int w, int h)
 
 }
 
-void draw_function(float a, float b, float (*func)(float))
+void draw_function(float a, float (*func)(float))
 {
     float h = (b - a) / 1000;
     for(a = a; a < b; a+=h)

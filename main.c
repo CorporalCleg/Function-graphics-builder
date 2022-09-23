@@ -7,18 +7,24 @@ void processNormalKeys(unsigned char key, int x, int y);
 
 float rx = 0;
 float ry = 0;
+float scx = 1;
+float scy = 1;
+
+float a;
+
 void init()
 {
     glClearColor(0.0, 0.0, 0.0, 1.0f);
 }
 float xq(float t){
-    return sin(1*t)/1 - sin(4*t)/2 + sin(8*t)/6 - sin(16*t)/24;///1 * pow(t, 1.5);
+    return pow(a * t, 1.5);///1 * pow(t, 1.5);
 }
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB);
 
+    scanf("%f", &a);
     glutInitWindowPosition(200, 200);
     glutInitWindowSize(500, 500);
 
@@ -27,6 +33,7 @@ int main(int argc, char **argv)
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(processNormalKeys);
+    
     init();
 
     glutMainLoop();
@@ -42,23 +49,25 @@ void display()
     glPointSize(2.0);
     //draw
     glTranslated(rx, ry, 0);
+    glScalef(scx, scy, 1);
 
     glBegin(GL_LINES);
     draw_axises(0,0);
     glEnd();
 
     glBegin(GL_POINTS);
-        int i;
+    int i;
     glColor3f(1.0, 0.9, 0.0);
-    for(i = -10; i < 10; i++)
+    for(i = -1 * b; i < b; i++)
     {
         glVertex2f(0, i);
         glVertex2f(i, 0);
     }
     glEnd();
+
     glColor3f(0.3, 0.9, 0.0);
     glBegin(GL_LINE_STRIP);
-    draw_function(-10,10, xq);
+    draw_function(0, xq);
     glEnd();
 
 /*
@@ -90,6 +99,16 @@ void processNormalKeys(unsigned char key, int x, int y) {
 		ry+=1;
     else if (key == 'w')
 		ry-=1;
+    else if (key == '+')
+    {
+		scx*=2;
+        scy*=2;
+    }
+    else if (key == '-')
+    {
+		scx*=0.5;
+        scy*=0.5;
+    }
     else
         exit(0);
     glutPostRedisplay();
